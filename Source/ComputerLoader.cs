@@ -356,7 +356,12 @@ namespace Hacknet
                             var num = (int) rdr.MoveToContent();
                             var filename1 = rdr.ReadElementContentAsString();
                             if (filename1 != null)
+                            {
+                                // Add Content/Missions/ prefix if path doesn't already include Content/
+                                if (!filename1.StartsWith("Content/") && !filename1.StartsWith("Content\\"))
+                                    filename1 = "Content/Missions/" + filename1;
                                 messageBoardDaemon.AddThread(Utils.readEntireFile(filename1));
+                            }
                         }
                         rdr.Read();
                     }
