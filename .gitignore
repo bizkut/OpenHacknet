@@ -223,3 +223,15 @@ lib/
 
 # Game Content
 Content/
+
+# NuGet executable
+nuget.exe
+
+# Steam DLLs (should be copied from game installation)
+CSteamworks.dll
+steam_api.dll
+Steamworks.NET.dll
+
+# Temporary log files
+*.txt
+!README.txt
