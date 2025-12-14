@@ -98,16 +98,15 @@ namespace Hacknet.Input
         {
             if (nCode == 0 && wParam == 1)
             {
-                TranslateMessage(ref msg);
                 switch (msg.Msg)
                 {
-                    case 256:
+                    case 256: // WM_KEYDOWN
                         OnKeyDown(new KeyEventArgs((Keys) msg.WParam));
                         break;
-                    case 257:
+                    case 257: // WM_KEYUP
                         OnKeyUp(new KeyEventArgs((Keys) msg.WParam));
                         break;
-                    case 258:
+                    case 258: // WM_CHAR
                         OnKeyPress(new KeyPressEventArgs((char) msg.WParam));
                         break;
                 }

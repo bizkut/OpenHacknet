@@ -74,8 +74,11 @@ namespace Hacknet
             Program.GraphicsDeviceResetLog = Program.GraphicsDeviceResetLog + "Reset at " +
                                              DateTime.Now.ToShortTimeString();
             Console.WriteLine("Graphics Device Reset Complete");
-            Utils.white.Dispose();
-            Utils.white = null;
+            if (Utils.white != null)
+            {
+                Utils.white.Dispose();
+                Utils.white = null;
+            }
             LoadRegenSafeContent();
             HasLoadedContent = true;
         }

@@ -479,17 +479,10 @@ namespace Hacknet
                 Game1.GetSingleton().Exit();
             }
             var num7 = y + 30;
-            if (!PlatformAPISettings.RemoteStorageRunning)
-            {
-                TextItem.doFontLabel(new Vector2(180f, num7), "WARNING: Error connecting to Steam Cloud",
-                    GuiData.smallfont, Color.DarkRed, float.MaxValue, float.MaxValue);
-                num7 += 20;
-            }
             if (string.IsNullOrWhiteSpace(AccumErrors))
                 return;
             TextItem.doFontLabel(new Vector2(180f, num7), AccumErrors, GuiData.smallfont, Color.DarkRed, float.MaxValue,
                 float.MaxValue);
-            var num8 = num7 + 20;
         }
 
         private enum MainMenuState

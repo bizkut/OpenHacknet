@@ -13,19 +13,10 @@ namespace Hacknet
         {
             if (Settings.isConventionDemo)
                 return;
-            Running = true; // SteamAPI.Init();
-            if (!Running)
-            {
-                Report = "First Init Failed. ";
-                Console.WriteLine("Steam Init Failed!");
-                Running = SteamAPI.InitSafe();
-                Report = Report + " Second init Running = " + Running;
-            }
-            else
-                Report = "Steam API Running :" + Running;
-            if (!Running)
-                return;
-            RemoteStorageRunning = false; // SteamRemoteStorage.IsCloudEnabledForAccount();
+            // Steam disabled - use local storage only
+            Running = false;
+            RemoteStorageRunning = false;
+            Report = "Steam API Disabled";
         }
     }
 }

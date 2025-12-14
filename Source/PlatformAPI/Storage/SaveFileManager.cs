@@ -84,7 +84,7 @@ namespace Hacknet.PlatformAPI.Storage
                             }
                         }
                     }
-                    if (saveFileManifest1 != null)
+                    if (saveFileManifest1 != null && PlatformAPISettings.Running)
                     {
                         for (var index1 = 0; index1 < saveFileManifest1.Accounts.Count; ++index1)
                         {
@@ -196,6 +196,8 @@ namespace Hacknet.PlatformAPI.Storage
 
         private static SaveFileManifest ReadOldSysemSteamCloudSaveManifest()
         {
+            if (!PlatformAPISettings.Running)
+                return null;
             var saveReadStream = RemoteSaveStorage.GetSaveReadStream("_accountsMeta", false);
             if (saveReadStream == null)
                 return null;

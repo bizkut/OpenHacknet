@@ -218,7 +218,7 @@ FakesAssemblies/
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
 
-# Steamworks.NET DLL
+# FNA library (copied from game installation)
 lib/
 
 # Game Content
@@ -227,10 +227,9 @@ Content/
 # NuGet executable
 nuget.exe
 
-# Steam DLLs (should be copied from game installation)
-CSteamworks.dll
-steam_api.dll
-Steamworks.NET.dll
+# Native DLLs (copied from game installation)
+*.dll
+!*.dll/
 
 # Temporary log files
 *.txt
