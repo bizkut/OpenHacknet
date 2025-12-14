@@ -1,7 +1,7 @@
 ![](https://github.com/CarysT/OpenHacknet/workflows/CoreRun/badge.svg)
 # OpenHacknet
 
-OpenHacknet is a decompile of Hacknet, a game written in C# and XNA/MonoGame.
+OpenHacknet is a decompile of Hacknet, a game written in C# and FNA (XNA reimplementation).
 
 OpenHacknet is supposed to support modding of Hacknet, not to encourage piracy.
 
@@ -10,45 +10,38 @@ To acquire the game resource files, buy Hacknet on Steam.
 ## Prerequisites
 
 - Visual Studio 2022 or later (with .NET Framework 4.8 targeting pack)
-- NuGet CLI (will be downloaded automatically if not present)
 - Hacknet game installed via Steam
 
 ## Setup
 
-1. **Create the lib folder and copy Steamworks.NET:**
-   ```
+1. **Create the lib folder and copy required DLLs:**
+   ```powershell
    mkdir lib
    copy "<Steam>\steamapps\common\Hacknet\Steamworks.NET.dll" lib\
+   copy "<Steam>\steamapps\common\Hacknet\FNA.dll" lib\
    ```
 
-2. **Restore NuGet packages:**
-   ```powershell
-   # Download nuget.exe if not present
-   Invoke-WebRequest -Uri "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" -OutFile "nuget.exe"
-   
-   # Add NuGet source and restore packages
-   .\nuget.exe sources add -Name nuget.org -Source https://api.nuget.org/v3/index.json
-   .\nuget.exe restore Hacknet.sln
-   ```
-
-3. **Create output directories and copy Steam DLLs:**
+2. **Create output directories and copy all game DLLs:**
    ```powershell
    mkdir bin\x86\Debug
    mkdir bin\x86\Release
    
-   copy "<Steam>\steamapps\common\Hacknet\CSteamworks.dll" bin\x86\Debug\
-   copy "<Steam>\steamapps\common\Hacknet\steam_api.dll" bin\x86\Debug\
-   copy "<Steam>\steamapps\common\Hacknet\CSteamworks.dll" bin\x86\Release\
-   copy "<Steam>\steamapps\common\Hacknet\steam_api.dll" bin\x86\Release\
+   # Copy all DLLs from the original game
+   copy "<Steam>\steamapps\common\Hacknet\*.dll" bin\x86\Debug\
+   copy "<Steam>\steamapps\common\Hacknet\*.dll" bin\x86\Release\
+   
+   # Copy locales folder (required for web rendering)
+   xcopy "<Steam>\steamapps\common\Hacknet\locales" bin\x86\Debug\locales\ /E /I
+   xcopy "<Steam>\steamapps\common\Hacknet\locales" bin\x86\Release\locales\ /E /I
    ```
 
-4. **Link game Content folder:**
+3. **Link game Content folder:**
    ```cmd
    mklink /J "bin\x86\Debug\Content" "<Steam>\steamapps\common\Hacknet\Content"
    mklink /J "bin\x86\Release\Content" "<Steam>\steamapps\common\Hacknet\Content"
    ```
 
-5. **Build the project:**
+4. **Build the project:**
    ```powershell
    msbuild Hacknet.sln -p:Configuration=Debug -p:Platform=x86
    ```
